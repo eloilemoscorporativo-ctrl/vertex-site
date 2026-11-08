@@ -311,3 +311,110 @@ em { font-style: normal; color: var(--laranja); }
   .vf, .vmark, .vmetal, .field polygon { transition: none !important; }
   .hero-v:hover .vf { translate: 0 0; }
 }
+
+/* ===== APP: identidade própria do Vertex GNSS =====
+   Tudo fica dentro de .app para não tocar no resto do site. */
+.app {
+  --a-noite: #020B16;
+  --a-laranja: #F96A03;
+  --a-cinza: #ECEEF1;
+  --a-branco: #FFFFFF;
+  --a-texto: #B2B1B1;
+  position: relative; isolation: isolate; overflow: hidden;
+  padding: clamp(88px, 11vw, 148px) 0 40px;
+  background: var(--a-noite);
+  color: var(--a-texto);
+  font-family: "Barlow", system-ui, sans-serif;
+  border-top: 1px solid rgba(236, 238, 241, .08);
+}
+/* Brilho laranja atrás dos celulares e meridianos do globo do ícone */
+.app::before {
+  content: ""; position: absolute; z-index: -1; inset: 0;
+  background:
+    radial-gradient(40% 50% at 74% 52%, rgba(249, 106, 3, .20), transparent 70%),
+    radial-gradient(30% 30% at 12% 8%, rgba(236, 238, 241, .05), transparent 70%);
+}
+.app::after {
+  content: ""; position: absolute; z-index: -1; width: 1100px; aspect-ratio: 1; right: -380px; top: 50%; translate: 0 -50%;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 89px, rgba(236, 238, 241, .05) 89px 90px);
+  mask-image: radial-gradient(circle, #000 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle, #000 30%, transparent 70%);
+}
+.app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
+
+.app-logo { width: 88px; height: 88px; border-radius: 50%; filter: drop-shadow(0 10px 30px rgba(249, 106, 3, .25)); }
+.app-kicker { margin-top: 28px; font: 600 .8rem/1 "Barlow", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--a-laranja); }
+.app-title { margin-top: 12px; font: 700 clamp(2.6rem, 1.6rem + 3.6vw, 4.4rem)/1 "Saira", sans-serif; letter-spacing: -.015em; color: var(--a-branco); }
+.app-sub { margin-top: 18px; max-width: 34ch; font-size: clamp(1.1rem, 1rem + .4vw, 1.3rem); line-height: 1.5; color: var(--a-cinza); text-wrap: pretty; }
+
+.app-feats { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; }
+.app-feats li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: start; }
+.app-feats strong { display: block; font: 600 1.02rem/1.25 "Saira", sans-serif; color: var(--a-branco); }
+.app-feats li span:not(.app-dot) { display: block; margin-top: 4px; font-size: .95rem; line-height: 1.5; color: var(--a-texto); }
+.app-dot { width: 12px; height: 12px; margin-top: 5px; border-radius: 50%; border: 2px solid var(--a-laranja); box-shadow: 0 0 0 4px rgba(249, 106, 3, .14); }
+
+.app-cta { margin-top: 44px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.app-play {
+  display: inline-flex; align-items: center; gap: 12px; height: 58px; padding: 0 22px 0 18px;
+  border-radius: 12px; background: var(--a-laranja); color: var(--a-noite); text-decoration: none;
+  transition: transform .25s var(--ease), background-color .25s;
+}
+a.app-play:hover { background: #FF8227; transform: translateY(-2px); }
+.app-play-ico { width: 24px; height: 24px; flex: none; }
+.app-play-txt { display: flex; flex-direction: column; font: 700 1.15rem/1.05 "Saira", sans-serif; }
+.app-play-txt small { font: 500 .72rem/1.2 "Barlow", sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+.app-play.is-soon { background: transparent; color: rgba(236, 238, 241, .55); border: 1px solid rgba(236, 238, 241, .2); cursor: not-allowed; user-select: none; }
+.app-soon { display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border-radius: 999px; font: 600 .78rem/1 "Barlow", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--a-laranja); background: rgba(249, 106, 3, .12); border: 1px solid rgba(249, 106, 3, .35); }
+
+/* Celulares */
+.app-phones { position: relative; height: clamp(540px, 52vw, 700px); }
+.phone {
+  --w: clamp(220px, 21vw, 300px);
+  --tx: -50%; --ty: 0px; --s: 1;
+  position: absolute; left: 50%; top: 50%; width: var(--w); margin: 0;
+  padding: 9px; border-radius: calc(var(--w) * .15);
+  background: linear-gradient(160deg, #1A2433, #0A111C 60%);
+  box-shadow: 0 0 0 1px rgba(236, 238, 241, .28), inset 0 0 0 1px rgba(236, 238, 241, .08), 0 40px 80px -20px rgba(0, 0, 0, .8);
+  transform: translate(var(--tx), calc(-50% + var(--ty))) scale(var(--s));
+}
+.phone img { width: 100%; border-radius: calc(var(--w) * .12); }
+.phone-front { z-index: 2; }
+.phone-back { --s: .82; filter: brightness(.7); }
+.phone-l { --tx: -104%; --ty: 30px; }
+.phone-r { --tx: 4%; --ty: 30px; }
+
+.app-foot { margin-top: clamp(64px, 8vw, 104px); padding-top: 24px; border-top: 1px solid rgba(236, 238, 241, .08); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.app-sign { font-size: .9rem; letter-spacing: .04em; color: rgba(178, 177, 177, .75); }
+.app-legal { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: .88rem; }
+.app-legal a { color: var(--a-texto); text-decoration: none; }
+.app-legal a:hover { color: var(--a-laranja); }
+@media (max-width: 560px) { .app-foot { justify-content: center; text-align: center; } .app-legal { justify-content: center; } }
+
+/* Entrada ao rolar: os itens sobem em sequência e os celulares de trás abrem para os lados */
+.js .app .rv { transition-duration: .9s; }
+.js .app-feats li:nth-child(2) { transition-delay: 60ms; }
+.js .app-feats li:nth-child(3) { transition-delay: 120ms; }
+.js .app-feats li:nth-child(4) { transition-delay: 180ms; }
+.js .app-feats li:nth-child(5) { transition-delay: 240ms; }
+.js .app-feats li:nth-child(6) { transition-delay: 300ms; }
+.js .app-feats li:nth-child(7) { transition-delay: 360ms; }
+.js .app-feats li:nth-child(8) { transition-delay: 420ms; }
+.js .app .phone.rv { opacity: 0; transition: opacity 1s var(--ease), transform 1.2s var(--ease); }
+.js .app .phone-front.rv { transform: translate(-50%, calc(-50% + 60px)); }
+.js .app .phone-back.rv { transform: translate(-50%, calc(-50% + 30px)) scale(.82); transition-delay: .25s; }
+.js .app .phone.rv.in { opacity: 1; transform: translate(var(--tx), calc(-50% + var(--ty))) scale(var(--s)); }
+
+@media (max-width: 1080px) {
+  .app-grid { grid-template-columns: 1fr; }
+  .app-phones { height: clamp(460px, 96vw, 640px); }
+  .phone { --w: clamp(190px, 40vw, 280px); }
+}
+@media (max-width: 560px) {
+  .app-feats { grid-template-columns: 1fr; }
+  .phone { --w: 52vw; }
+  .phone-l { --tx: -96%; }
+  .phone-r { --tx: -4%; }
+  .app-play { flex: 1 1 auto; justify-content: center; }
+}
